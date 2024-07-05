@@ -1,6 +1,6 @@
 # Description:
 
-This is a stepper motor car. It is drive by a TM4C123 Microcontroller from Texas Instruments and programmed in embedded C using the Keil uVision IDE. It is driven by a power supply circuit which 6V is applied from a AA battery pack. For the stepper motor, the classic 28BYJ-48 5V DC Motor. To supply the necessary current to the stepper motors, two ULN2003 motor drivers are also used. To detect an obstacle in front of the car, an IR sensor module was used to perform this task.
+This is a stepper motor car. It is driven by a TM4C123 Microcontroller from Texas Instruments and programmed in embedded C using the Keil uVision IDE. It is driven by a power supply circuit which 6V is applied from a AA battery pack. For the stepper motor, the classic 28BYJ-48 5V DC Motor. To supply the necessary current to the stepper motors, two ULN2003 motor drivers are also used. To detect an obstacle in front of the car, an IR sensor module was used to perform this task.
 
 # Construction:
 
