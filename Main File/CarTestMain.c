@@ -44,27 +44,27 @@
 #include "tm4c123gh6pm.h"
 #include <stdbool.h>
 
-#define T1ms 							16000U    // Systick reload value to generate 1ms delay, assumes using 16 MHz Clock.
+#define T1ms 			16000U    // Systick reload value to generate 1ms delay, assumes using 16 MHz Clock.
 #define HIGHEST_SPEED 		2*T1ms  // fastest speed the stepper can move
-#define FASTER_SPEED			5*T1ms
+#define FASTER_SPEED		5*T1ms
 #define STANDARD_SPEED		10*T1ms  // stepper motor speed: output every 10ms, frequency for the stepper motor is 100Hz.
 #define HALF_SEC      		500*T1ms //systick reload value for 0.5s
 
 #define BUTTONS          	(*((volatile uint32_t *)0x40025044))  // PORT F, pin:1 & 4
-#define BUTTON1MASK   				0x10
-#define BUTTON2MASK   				0x01
+#define BUTTON1MASK   		0x10
+#define BUTTON2MASK   		0x01
 
-#define SENSOR 		(*((volatile uint32_t *) 0x40007100)) 
+#define SENSOR 			(*((volatile uint32_t *) 0x40007100)) 
 
 bool too_close = false;
 
 int main(void){
-	uint16_t i=0;
+  uint16_t i=0;
 	
 	//Sensor_Init();
   SysTick_Init();
   Stepper_Init();
-	PORTF_Init();
+  PORTF_Init();
 	
   while(1){
 		too_close = false;
@@ -77,7 +77,6 @@ int main(void){
 			Step_Left(FASTER_SPEED,90);   
 			stop_Car();
 			SysTick_Wait(HALF_SEC);  // wait for 0.5s
-			
 			Sensor_Init();
 			
 			while(!(too_close)){
@@ -86,8 +85,8 @@ int main(void){
 			stop_Car();
 			SysTick_Wait(HALF_SEC);
 			for(int i = 0; i < 19; ++i){
-					SysTick_Wait(HALF_SEC);
-				}
+				SysTick_Wait(HALF_SEC);
+			}
 				Step_Forward(FASTER_SPEED,600); 
 			
 		} else if (!(BUTTONS & BUTTON2MASK)){
@@ -109,10 +108,9 @@ void GPIOPortD_Handler(void)
 {
 	GPIO_PORTD_ICR_R = 0x40; //acknowledge flag6
 	if (SENSOR) {
-			too_close = true;
-	}
-	else{
-			too_close = false;
+		too_close = true;
+	}else{
+		too_close = false;
 	}
 }
 
